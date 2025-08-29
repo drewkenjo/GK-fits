@@ -3,43 +3,47 @@
   {{ data }}
   <div>
     <h1>{{ message }}</h1>
-
-    <DataTable :value="products" tableStyle="min-width: 50rem">
-      <Column v-for="col of columns" :key="col.field" :field="col.field" :header="col.header"></Column>
+    <DataTable
+      filterDisplay="row"
+      :globalFilterFields="['day','time','name']"
+      :value="products"
+      tableStyle="min-width: 50rem"
+      @row-click="console.log"
+      size="small"
+    >
+      <Column v-for="col of columns" :key="col" :field="col" :header="col">
+      </Column>
     </DataTable>
   </div>
 </template>
 
 <script setup>
-import { computed, ref } from "vue"
-import { useFetch } from '@vueuse/core'
+import { computed, onMounted, ref } from "vue"
+import moment from 'moment'
 
 const message = ref("Hello World")
 
-const products1 = ref([
-{
-    id: '1000',
-    code: 'f230fh0g3',
-    name: 'Bamboo Watch',
-    description: 'Product Description',
-    image: 'bamboo-watch.jpg',
-    price: 65,
-    category: 'Accessories',
-    quantity: 24,
-    inventoryStatus: 'INSTOCK',
-    rating: 5
-},
-])
+const products = ref([])
 
-const products = computed(() => JSON.parse(data))
+const columns = ['day', 'time', 'name']
 
-const columns = [
-    { field: 'name', header: 'Name' },
-    { field: 'download_url', header: 'Category' },
-    { field: '_links', header: 'Quantity' }
+const columns1 = [
+    { field: 'day', header: 'Name' },
+    { field: 'time', header: 'Category' },
+    { field: 'name', header: 'Quantity' }
 ]
 
-const { data, error, isFetching } = useFetch('https://api.github.com/repos/drewkenjo/GK-fits/contents/fits')
+onMounted(async () => {
+  const data = await fetch('https://api.github.com/repos/drewkenjo/GK-fits/contents/fits').then(res => res.json())
+  products.value = data.filter(it=>it.name.startsWith('20') && it.name.endsWith('.pars')).map(it=>{
+    const [_day, _time] = it.name.split('_').slice(0,2)
+    const date = moment(`${_day} ${_time}`)
+    const day = date.format('ll')
+    const time = date.format('HH:mm')
+
+    return Object.assign({day, time}, it)
+  })
+})
 
 </script>
 
