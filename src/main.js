@@ -1,4 +1,4 @@
-// import "./assets/styles/main.css";
+import "./assets/styles/main.css";
 
 import { createApp } from 'vue'
 import { createPinia } from 'pinia'
@@ -8,7 +8,7 @@ import piniaPluginPersistedstate from 'pinia-plugin-persistedstate'
 import App from './App.vue'
 import router from './router'
 import PrimeVue from 'primevue/config'
-import Material from "@primeuix/themes/material"
+import Nora from "@primeuix/themes/nora"
 
 
 const app = createApp(App)
@@ -20,11 +20,14 @@ app.use(pinia)
 app.use(router)
 app.use(PrimeVue, {
     theme: {
-        preset: Material,
+        preset: Nora,
         options: {
             prefix: 'p',
             darkModeSelector: 'system',
-            cssLayer: false
+            cssLayer: {
+                name: 'primevue',
+                order: 'theme, base, primevue'
+            }
         }
     }
 })
