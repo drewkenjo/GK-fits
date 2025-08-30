@@ -1,7 +1,7 @@
 _200.oldmix.minos.syst.noHA21.noCLAS12
 1142.355097, 194
 ETbar_nu, 3.3515, 0, 0
-ETbar_nb, 2.0311, 0, 0
+ETbar_nd, 2.0311, 0, 0
 ETbar_bu, 0.77, 0, 0
 ETbar_bd, 0.5, 0, 0
 ETbar_alpha0U, -0.1, 0,0
@@ -9,7 +9,7 @@ ETbar_alpha0D, -0.1, 0,0
 ETbar_alphastrU, 0.45, 0,0
 ETbar_alphastrD, 0.45, 0,0
 HT_nu, 0.82997, 0,0
-HT_nb, -0.05209, 0,0
+HT_nd, -0.05209, 0,0
 HT_bu, 0.3, 0,0
 HT_bd, 0.3, 0,0
 HT_alpha0U, -0.17, 0,0
