@@ -23,6 +23,7 @@ app.use(PrimeVue, {
         preset: Nora,
         options: {
             prefix: 'p',
+            darkModeSelector: '.my-app-dark',
             cssLayer: {
                 name: 'primevue',
                 order: 'theme, base, primevue'
