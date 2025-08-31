@@ -60,7 +60,21 @@
       <Column v-for="col in fitsStore.selected" :key="col" :field="col" class="w-3">
         <template #header>
           <div class="flex flex-col">
-            <Tag v-for="tag in tagColumns" :key="tag.field" :severity="severities[parsData[col]?.[tag.field]]" :value="parsData[col]?.[tag.field]" class='text-xs' rounded/>
+            <Button
+              icon="pi pi-times"
+              class="self-center mb-1"
+              size="small"
+              severity="secondary"
+              @click="fitsStore.selected.splice(fitsStore.selected.indexOf(col), 1)"
+            />
+            <Tag
+              v-for="tag in tagColumns"
+              :key="tag.field"
+              :severity="severities[parsData[col]?.[tag.field]]"
+              :value="parsData[col]?.[tag.field]"
+              class='text-xs'
+              rounded
+            />
           </div>
         </template>
         <template #body="{data, index, field}">
