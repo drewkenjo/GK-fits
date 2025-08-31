@@ -1,10 +1,10 @@
-import { ref, computed } from 'vue'
+import { ref } from 'vue'
 import { defineStore } from 'pinia'
 
 export const useFitsStore = defineStore('fitsStore', () => {
-  // state
   const selected = ref([])
-  return { selected }
+  const filters = ref(null)
+  return { selected, filters }
 }, {
-  persist: true   // 👈 enable persistence
+  persist: true
 })
